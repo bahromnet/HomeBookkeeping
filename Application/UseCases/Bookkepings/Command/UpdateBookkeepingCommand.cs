@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases.Bookkepings.Command
 {
-    internal class UpdateBoolleepingCommand
+    public class UpdateBookkeepingCommand
     {
+
     }
 }
