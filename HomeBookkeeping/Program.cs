@@ -12,10 +12,18 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
 
-        builder.Services.AddInfrastructure(builder.Configuration);
+        builder.Services.AddAuthentication();
 
+        builder.Services.AddAuthorization();
+
+
+
+        builder.Services.AddInfrastructure(builder.Configuration);
+        builder.Services.AddHttpContextAccessor();
         var app = builder.Build();
 
+
+        
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
         {
@@ -31,6 +39,7 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
+        app.MapRazorPages();
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
