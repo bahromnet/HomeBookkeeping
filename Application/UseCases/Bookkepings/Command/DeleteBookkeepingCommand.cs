@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases.Bookkepings.Command
 {
-    internal class DeleteBookkeepingCommand
+    public class DeleteBookkeepingCommand
     {
     }
 }
