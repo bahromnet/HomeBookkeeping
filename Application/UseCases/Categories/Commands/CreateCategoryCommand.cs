@@ -5,7 +5,6 @@ using MediatR;
 namespace Application.UseCases.Categories.Commands;
 public record CreateCategoryCommand : IRequest<Guid>
 {
-    public Guid CategoryId { get; set; }
     public string CategoryName { get; set; }
     public bool ExpenceIncomeType { get; set; }
 }
