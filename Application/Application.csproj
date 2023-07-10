@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="UseCases\Bookkepings\NewFolder\**" />
+    <EmbeddedResource Remove="UseCases\Bookkepings\NewFolder\**" />
+    <None Remove="UseCases\Bookkepings\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Common\Mappings\" />
     <Folder Include="Common\Services\" />
