@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Common.Models
+namespace Application.Common.Exceptions
 {
-    internal class BookkepingGetDto
+    internal class NotfoundException
     {
     }
 }
