@@ -10,7 +10,6 @@
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Common\Mappings\" />
     <Folder Include="Common\Services\" />
-    <Folder Include="UseCases\Bookkepings\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.Common.Models
+﻿namespace Application.Common.Models
 {
-    internal class CategoryGetDto
+    public class CategoryGetDto
     {
+        public Guid CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public bool ExpenceIncomeType { get; set; }
+
     }
 }
