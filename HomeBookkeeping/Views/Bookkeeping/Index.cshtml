@@ -1,7 +1,10 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Application.UseCases.Bookkepings.Queries;
+@using MediatR;
+@inject IMediator mediator;
+
 @{
+    var bookkeepings = await mediator.Send(new GetAllBookkeepingQueries());
+    int i = 1;
 }
 <a asp-action="Create" role="button" class="btn btn-success mb-1">Create</a>
 <div class="container border" style=" background-color: rgba(255, 255,255, 0.6);border-radius:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
@@ -11,45 +14,27 @@
                 <th scope="col">#</th>
                 <th scope="col">Category</th>
                 <th scope="col">Amout</th>
-                <th scope="col">Created</th>
+                <th scope="col">Date</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Transport</td>
-                <td>-5$</td>
-                <td>27.04.11</td>
-                <td>
-                    <a role="button" class="btn btn-warning btn-normalize">Update</a>
-                    <a role="button" class="btn btn-danger btn-normalize">Remove</a>
-                    <a role="button" class="btn btn-primary btn-normalize">Details</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Transport</td>
-                <td>-5$</td>
-                <td>27.04.11</td>
-                <td>
-                    <a role="button" class="btn btn-warning btn-normalize">Update</a>
-                    <a role="button" class="btn btn-danger btn-normalize">Remove</a>
-                    <a role="button" class="btn btn-primary btn-normalize">Details</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Transport</td>
-                <td>-5$</td>
-                <td>27.04.11</td>
-                <td>
-                    <a role="button" class="btn btn-warning btn-normalize">Update</a>
-                    <a role="button" class="btn btn-danger btn-normalize">Remove</a>
-                    <a role="button" class="btn btn-primary btn-normalize">Details</a>
-                </td>
-
-            </tr>
+            @foreach (var item in bookkeepings)
+            {
+                <tr>
+                    <th scope="row">@(i++)</th>
+                    <td>@item.Category.CategoryName</td>
+                    <td class="@((item.Category.ExpenceIncomeType) ? "text-success" : "text-danger")">@((item.Category.ExpenceIncomeType) ? $"+{item.Amount}$" : $"-{item.Amount}$")</td>
+                    <td>@item.Created</td>
+                    <td>
+                        <a role="button" asp-action="Update" asp-route-id="@item.BookkeepingId" class="btn btn-warning btn-normalize">Update</a>
+                        <a role="button" class="btn btn-danger btn-normalize">Remove</a>
+                        <a role="button" class="btn btn-primary btn-normalize">Details</a>
+                    </td>
+                </tr>
+            }
+           
+           
         </tbody>
     </table>
 </div>

@@ -37,8 +37,8 @@
                 <textarea asp-for="Comment" class="form-control"></textarea>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedAt">Date</label>
-                <input class="form-control" id="datePicker" type="datetime-local" />
+                <label asp-for="CreatedAt">Default(@DateTime.Now.ToString())</label>
+                <input asp-for="CreatedAt" class="form-control" id="datePicker" type="datetime-local" />
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
 
@@ -63,7 +63,7 @@
        
         var formattedDate = now.toISOString().slice(0, 16)
 
-        datePicker.value = formattedDate;
+        //datePicker.value = formattedDate;
 
        
     });

@@ -1,1 +1,58 @@
-﻿
+﻿@using Application.UseCases.Categories.Queries;
+@using MediatR;
+@model Application.Common.Models.BookkeepingGetDto;
+@inject IMediator mediator;
+@{
+    
+    var Categories = await mediator.Send(new GetAllCategoriesQuery());
+
+}
+<div class="row text-dark justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Update" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="@Model.BookkeepingId" hidden/>
+            <input asp-for="@Model.CreatedBy" hidden/>
+            <div class="form-group">
+                <label asp-for="@Model.Category.CategoryId" class="control-label">Category</label>
+                <select asp-for="@Model.Category.CategoryId" class="form-select" aria-label="Default select example">
+                    <option value="@Model.Category.CategoryId" selected>@Model.Category.CategoryName</option>
+                    @foreach (var item in Categories)
+                    {
+                        <option value="@item.CategoryId" style="color: @(item.ExpenceIncomeType ? "green" : "red")">@item.CategoryName (@InComingExpenceTypeString(item.ExpenceIncomeType))</option>
+
+                    }
+                    <span asp-validation-for="Category.CategoryId" class="text-danger"></span>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Amount">Amout</label>
+                <input asp-for="@Model.Amount" class="form-control" type="number" />
+                <span asp-validation-for="@Model.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Comment">Comment</label>
+                <textarea asp-for="@Model.Comment" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Created">Default(@DateTime.Now.ToString())</label>
+                <input asp-for="@Model.Created" class="form-control" id="datePicker" type="datetime-local" />
+            </div>
+            <div class="col d-flex justify-content-center">
+             <a role="button" asp-action="Index" class="btn btn-secondary">Cancel</a>
+             <button type="submit" class="btn btn-primary">Update</button>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+@{
+    string InComingExpenceTypeString(bool type)
+    {
+        if (type)
+            return "Incoming";
+        else return "Expence";
+    }
+}
