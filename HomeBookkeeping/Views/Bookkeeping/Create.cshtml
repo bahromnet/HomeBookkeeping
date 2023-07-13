@@ -1,10 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Create";
 }
-<form>
+@model Application.UseCases.Bookkepings.Command.CreateBookkeepingCommand;
+
+<div class="row text-light">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label> 
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <a asp-action="Create" asp-controller="Category">+ Add category</a>
+                </select>
+
+            </div>
+            <div class="form-group"> 
+
+            </div>
 
 
-
-</form>
+        </form>
+    </div>
+</div>
