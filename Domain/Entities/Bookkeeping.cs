@@ -9,7 +9,7 @@ public class Bookkeeping
 {
     public Guid BookkeepingId { get; set; }
     public decimal Amount { get; set; }
-    public string Comment { get; set; }
+    public string? Comment { get; set; }
 
     public Guid CategoryId { get; set; } 
     public virtual Category? Category { get; set; }
