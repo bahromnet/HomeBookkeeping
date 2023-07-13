@@ -41,9 +41,7 @@ namespace Application.UseCases.Bookkepings.Command
             entity.LastModified = DateTime.Now;
             entity.LastModifiedBy = _currentUser.Id;
 
-       
-            await _context.SaveChangesAsync(cancellationToken);
-            return true;
+            return (await _context.SaveChangesAsync(cancellationToken)) > 0;
         }
     }
 }

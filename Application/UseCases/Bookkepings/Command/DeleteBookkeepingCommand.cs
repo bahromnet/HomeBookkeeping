@@ -30,9 +30,9 @@ namespace Application.UseCases.Bookkepings.Command
                 throw new NotFoundException(nameof(Bookkeeping), request.Id);
 
             _context.Bookkeepings.Remove(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+            
 
-            return true;
+            return (await _context.SaveChangesAsync(cancellationToken)) > 0;
         }
     }
 }
