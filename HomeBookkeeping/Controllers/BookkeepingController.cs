@@ -11,10 +11,10 @@ public class BookkeepingController : Controller
         return await Task.FromResult(View());
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Update()
-    {
-
-    }
+    //[HttpPost]
+    //public async Task<IActionResult> Update()
+    //{
+    //    return View();
+    //}
 
 }

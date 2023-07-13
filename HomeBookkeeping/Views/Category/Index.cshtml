@@ -1,0 +1,74 @@
+﻿
+@{
+
+}
+
+<div class="container border" style=" background-color: rgba(255, 255,255, 0.6);border-radius:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Transport</td>
+                <td>Income</td>
+                <td>
+                    <a role="button" class="btn btn-warning btn-normalize">Update</a>
+                    <a role="button" class="btn btn-danger btn-normalize">Remove</a>
+                    <a role="button" class="btn btn-primary btn-normalize">Details</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Food</td>
+                <td>Expence</td>
+                <td>
+                    <a role="button" class="btn btn-warning btn-normalize">Update</a>
+                    <a role="button" class="btn btn-danger btn-normalize">Remove</a>
+                    <a role="button" class="btn btn-primary btn-normalize">Details</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Education</td>
+                <td>Income</td>
+                <td>
+                    <a role="button" class="btn btn-warning btn-normalize">Update</a>
+                    <a role="button" class="btn btn-danger btn-normalize">Remove</a>
+                    <a role="button" class="btn btn-primary btn-normalize">Details</a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div style="position: fixed; right: 25px; bottom: 25px;" class="text-white">
+    <a asp-controller="@Model" asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Add New
+    </a>
+</div>
+
+<style>
+    body {
+        background-image: url(/images/categoryMain.jpg);
+        background-repeat: no-repeat;
+        background-color: #cccccc;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .btn-normalize {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+        line-height: 1.6;
+        border-radius: 0.3rem;
+        margin: 0;
+    }
+</style>
