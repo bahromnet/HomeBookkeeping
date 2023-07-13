@@ -10,6 +10,7 @@ namespace Application.UseCases.Bookkepings.Command
         public decimal Amount { get; set; }
         public string Comment { get; set; }
         public Guid CategoryId { get; set; }
+        public DateTime CreatedAt { get; set; }= DateTime.Now;
     }
 
     public class CreateBookkeepingCommandHandler : IRequestHandler<CreateBookkeepingCommand, Guid>
@@ -31,7 +32,7 @@ namespace Application.UseCases.Bookkepings.Command
                 Amount = request.Amount,
                 Comment = request.Comment,
                 CategoryId = request.CategoryId,
-                Created = DateTime.Now,
+                Created =request.CreatedAt,
                 CreatedBy = _userService.Id,
             };
 

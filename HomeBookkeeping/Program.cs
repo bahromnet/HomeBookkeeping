@@ -1,6 +1,9 @@
+using Application;
 using Application.Common.Interfaces;
 using HomeBookkeeping.Services;
 using Infrastructure;
+using System.Reflection;
+
 namespace HomeBookkeeping;
 public class Program
 {
@@ -17,7 +20,7 @@ public class Program
         builder.Services.AddAuthentication();
 
         builder.Services.AddAuthorization();
-
+        builder.Services.AddApplication();
         builder.Services.AddScoped<ICurrentUserService, CurrentUser>();
 
         builder.Services.AddInfrastructure(builder.Configuration);
