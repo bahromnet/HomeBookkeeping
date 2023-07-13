@@ -26,7 +26,7 @@ namespace Application.UseCases.Bookkepings.Queries
 
         public async Task<List<BookkeepingGetDto>> Handle(GetAllBookkeepingQueries request, CancellationToken cancellationToken)
         {
-            List<Bookkeeping> res =  await _context.Bookkeepings.AsNoTracking().ToListAsync(cancellationToken);
+            List<Bookkeeping> res =  await _context.Bookkeepings.ToListAsync(cancellationToken);
             var resMap = _mapper.Map<List<BookkeepingGetDto>>(res);
             return resMap;
         }

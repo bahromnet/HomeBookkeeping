@@ -1,13 +1,15 @@
+using Application;
 using Application.Common.Interfaces;
 using HomeBookkeeping.Services;
 using Infrastructure;
+using System.Reflection;
+
 namespace HomeBookkeeping;
 public class Program
 {
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
 
@@ -17,12 +19,13 @@ public class Program
         builder.Services.AddAuthentication();
 
         builder.Services.AddAuthorization();
-
+        builder.Services.AddApplication();
         builder.Services.AddScoped<ICurrentUserService, CurrentUser>();
 
         builder.Services.AddInfrastructure(builder.Configuration);
         builder.Services.AddHttpContextAccessor();
         var app = builder.Build();
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
         
