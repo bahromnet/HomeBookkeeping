@@ -7,7 +7,6 @@ namespace Application.UseCases.Bookkepings.Command
 {
     public record class CreateBookkeepingCommand : IRequest<Guid>
     {
-        public Guid BookkeepingId { get; set; }
         public decimal Amount { get; set; }
         public string Comment { get; set; }
         public Guid CategoryId { get; set; }
@@ -28,7 +27,7 @@ namespace Application.UseCases.Bookkepings.Command
         {
             var entity = new Bookkeeping
             {
-                BookkeepingId = new Guid(),
+                BookkeepingId = Guid.NewGuid(),
                 Amount = request.Amount,
                 Comment = request.Comment,
                 CategoryId = request.CategoryId,

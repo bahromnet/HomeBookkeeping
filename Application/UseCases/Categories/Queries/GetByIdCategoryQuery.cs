@@ -1,26 +1,31 @@
 ﻿using Application.Common.Exceptions;
 using Application.Common.Interfaces;
-using Domain.Entities;
+using Application.Common.Models;
+using AutoMapper;
 using MediatR;
 
 namespace Application.UseCases.Categories.Queries;
-public record GetByIdCategoryQuery : IRequest<Category>
+public record GetByIdCategoryQuery : IRequest<CategoryGetDto>
 {
     public Guid CategoryId { get; set; }
 }
-public class GetByIdCategoryQueryHandler : IRequestHandler<GetByIdCategoryQuery, Category>
+public class GetByIdCategoryQueryHandler : IRequestHandler<GetByIdCategoryQuery, CategoryGetDto>
 {
     private readonly IApplicationDbContext _context;
-
-    public GetByIdCategoryQueryHandler(IApplicationDbContext context)
-        => _context = context;
-
-    public async Task<Category> Handle(GetByIdCategoryQuery request, CancellationToken cancellationToken)
+    private readonly IMapper _mapper;
+    public GetByIdCategoryQueryHandler(IApplicationDbContext context, IMapper mapper)
+    {
+        _context = context;
+        _mapper = mapper;
+    }
+       
+    public async Task<CategoryGetDto> Handle(GetByIdCategoryQuery request, CancellationToken cancellationToken)
     {
         var findCategory = await _context.Category.FindAsync(new object[] { request.CategoryId });
         if (findCategory is null)
             throw new NotFoundException();
-
-        return findCategory;
+        var resMap = _mapper.Map<CategoryGetDto>(findCategory);
+    
+        return resMap;
     }
 }
