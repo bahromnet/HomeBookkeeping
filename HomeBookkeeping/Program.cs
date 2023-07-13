@@ -1,3 +1,5 @@
+using Application.Common.Interfaces;
+using HomeBookkeeping.Services;
 using Infrastructure;
 namespace HomeBookkeeping;
 public class Program
@@ -16,7 +18,7 @@ public class Program
 
         builder.Services.AddAuthorization();
 
-
+        builder.Services.AddScoped<ICurrentUserService, CurrentUser>();
 
         builder.Services.AddInfrastructure(builder.Configuration);
         builder.Services.AddHttpContextAccessor();
