@@ -2,7 +2,24 @@
     ViewData["Title"] = "Home Page";
 }
 
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4 text-dark fw-bolder">Welcome to service</h1>
+    <h3 class="text-dark fw-normal">Calculate your expenses with our service!</h3>
 </div>
+<div class="container d-flex align-items-center justify-content-center" style="height: 40vh;">
+
+    <a role="button" asp-action="Index" asp-controller="Bookkeeping" class="btn btn-primary" style="width:150px; border-radius:15px">Start ➡️</a>
+    
+</div>
+
+
+<style>
+    body {
+        background-image: url(/images/mainImage.jpg);
+        background-repeat: no-repeat;
+        background-color: #cccccc;
+        background-size: cover;
+        background-position: center;
+    }
+</style>

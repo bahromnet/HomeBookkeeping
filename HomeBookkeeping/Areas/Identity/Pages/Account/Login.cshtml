@@ -46,17 +46,18 @@
             </form>
         </section>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    <div class="col-md-6 col-md-offset-2 text-light fw-bold">
         <section>
-            <h3>Use another service to log in.</h3>
+            <h3 class="text-dark">Login or Register.</h3>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
-                    <div>
+                    <div class="container bg-light opacity-75 p-5 text-primary" style="border-radius:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
                         <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
+                            If you are new to Home Bookkeeping, you can create a new account by clicking on the "Sign Up" link below the login form. This will guide you through the registration process, where you can set up your unique username and password.
+
+                            For security purposes, please ensure that you choose a strong password that includes a combination of letters, numbers, and special characters. Additionally, it is important to keep your login credentials confidential and not share them with anyone.
                         </p>
                     </div>
                 }
@@ -77,6 +78,15 @@
         </section>
     </div>
 </div>
+<style>
+    body{
+        background-image: url(/images/loginImage.jpg);
+        background-repeat: no-repeat;
+        background-color: #cccccc;
+        background-size: cover;
+        background-position: center;
+    }
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

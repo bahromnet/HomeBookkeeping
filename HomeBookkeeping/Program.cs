@@ -5,17 +5,25 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-       
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-        
+
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
 
-        builder.Services.AddInfrastructure(builder.Configuration);
+        builder.Services.AddAuthentication();
 
+        builder.Services.AddAuthorization();
+
+
+
+        builder.Services.AddInfrastructure(builder.Configuration);
+        builder.Services.AddHttpContextAccessor();
         var app = builder.Build();
 
+
+        
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
         {
@@ -28,9 +36,10 @@ public class Program
         app.UseStaticFiles();
 
         app.UseRouting();
-
+        app.UseAuthentication();
         app.UseAuthorization();
-
+        app.MapControllers();
+        app.MapRazorPages();
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
