@@ -10,7 +10,6 @@ public class Category
     /// </summary>
     public bool ExpenceIncomeType { get; set; }
 
-
     public virtual IList<Bookkeeping>? Bookkeepings { get; set; } = new List<Bookkeeping>();
 
 

@@ -1,10 +1,70 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Application.UseCases.Categories.Queries;
+@using MediatR;
+@model Application.UseCases.Bookkepings.Command.CreateBookkeepingCommand;
+@inject IMediator mediator;
 @{
+    ViewData["Title"] = "Create";
+    var Categories = await mediator.Send(new GetAllCategoriesQuery());
+
 }
-<form>
 
 
 
-</form>
+<div class="row text-dark justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Category</label> 
+                <select asp-for="CategoryId" class="form-select" aria-label="Default select example">
+                    <option  selected>Open this select menu</option>
+                    @foreach (var item in Categories)
+                    {
+                        <option value="@item.CategoryId" style="color: @(item.ExpenceIncomeType ? "green" : "red")">@item.CategoryName (@InComingExpenceTypeString(item.ExpenceIncomeType))</option>
+
+                    }
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </select>
+
+            </div>
+            <div class="form-group"> 
+                <label asp-for="Amount">Amout</label>
+                <input asp-for="Amount" class="form-control" type="number"/>
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div> 
+            <div class="form-group">
+                <label asp-for="Comment">Comment</label>
+                <textarea asp-for="Comment" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedAt">Date</label>
+                <input class="form-control" id="datePicker" type="datetime-local" />
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+
+        </form>
+    </div>
+</div>
+
+@{
+    string InComingExpenceTypeString(bool type)
+    {
+        if (type)
+            return "Incoming";
+        else return "Expence";
+    }
+
+}
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var datePicker = document.getElementById('datePicker');
+        var now = new Date();
+       
+        var formattedDate = now.toISOString().slice(0, 16)
+
+        datePicker.value = formattedDate;
+
+       
+    });
+</script>
