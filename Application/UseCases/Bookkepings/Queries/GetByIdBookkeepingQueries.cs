@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases.Bookkepings.Queries
 {
-    public class GetByIdBookkeepingQueries
+    public class GetByIdBookkeepingQueries : 
     {
     }
 }
