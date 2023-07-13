@@ -12,10 +12,10 @@ public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuer
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
-    public GetAllCategoriesQueryHandler(IApplicationDbContext context, IMapper _mapper)
+    public GetAllCategoriesQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
-        _mapper = _mapper;
+        _mapper = mapper;
     }
     
     public async Task<List<CategoryGetDto>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
