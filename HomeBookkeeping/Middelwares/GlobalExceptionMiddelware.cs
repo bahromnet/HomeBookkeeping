@@ -35,7 +35,7 @@ namespace HomeBookkeeping.Middelwares
         {
             _logger.LogCritical(message);
             HttpResponse response = httpContext.Response;
-            response.ContentType = message;
+            response.ContentType = "application/json";
             response.StatusCode = (int)httpStatusCode;
 
             var error = new

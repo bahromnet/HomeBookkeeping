@@ -69,8 +69,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("ExpenceIncomeType")
-                        .HasColumnType("boolean");
+                    b.Property<string>("ExpenceIncomeType")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("CategoryId");
 

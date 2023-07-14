@@ -1,0 +1,58 @@
+﻿@using Application.Common.Models;
+@model CategoryGetDto
+
+@{
+    ViewData["Title"] = "Add new Category";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Add a New Category</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="CategoryName" class="control-label">Category Name</label>
+                        <input asp-for="CategoryName" class="form-control" />
+                        <span asp-validation-for="CategoryName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ExpenceIncomeType">Type</label>
+                        <select id="type" asp-for="ExpenceIncomeType" class="form-control">
+                            <option value="">-- Please select an option --</option>
+                            <option value="Income">Income</option>
+                            <option value="Expence">Expence</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <input type="submit" value="Create" class="btn btn-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-image: url(/images/BookkeepingMain.jpg);
+        background-repeat: no-repeat;
+        background-color: #cccccc;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .btn-normalize {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+        line-height: 1.6;
+        border-radius: 0.3rem;
+        margin: 0;
+    }
+</style>

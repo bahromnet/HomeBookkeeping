@@ -20,7 +20,7 @@
                     <option  selected>Open this select menu</option>
                     @foreach (var item in Categories)
                     {
-                        <option value="@item.CategoryId" style="color: @(item.ExpenceIncomeType ? "green" : "red")">@item.CategoryName (@InComingExpenceTypeString(item.ExpenceIncomeType))</option>
+                        <option value="@item.CategoryId" style="color: @(item.ExpenceIncomeType == "Income" ? "green" : "red")">@item.CategoryName (@item.ExpenceIncomeType))</option>
 
                     }
                     <span asp-validation-for="CategoryId" class="text-danger"></span>
@@ -46,15 +46,6 @@
     </div>
 </div>
 
-@{
-    string InComingExpenceTypeString(bool type)
-    {
-        if (type)
-            return "Incoming";
-        else return "Expence";
-    }
-
-}
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {

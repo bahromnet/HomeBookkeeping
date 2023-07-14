@@ -17,7 +17,7 @@
         <div class="col-md-6 p-5" style="background-color: rgba(255, 255,255, 0.6);border-radius:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
             <dl class="row">
                 <dt class="col-sm-4">Amount:</dt>
-                <dd class="col-sm-8 @((Model.Category.ExpenceIncomeType) ? "text-success" : "text-danger")">@((Model.Category.ExpenceIncomeType) ? $"+{Model.Amount}$" : $"-{Model.Amount}$")</dd>
+                <dd class="col-sm-8 @((Model.Category.ExpenceIncomeType == "Income") ? "text-success" : "text-danger")">@((Model.Category.ExpenceIncomeType == "Income") ? $"+{Model.Amount}$" : $"-{Model.Amount}$")</dd>
          
                 <dt class="col-sm-4">Comment:</dt>
                 <dd class="col-sm-8">@Model.Comment</dd>
@@ -44,15 +44,50 @@
                 }
             </dl>
             <div class="col d-flex justify-content-xxl-end">
-        <a role="button" asp-action="Index" class="btn btn-secondary m-1">Back</a>
-        <a role="button" asp-action="Update" asp-route-id="@Model.BookkeepingId" class="btn btn-warning m-1">Edit</a>
-        <a role="button" asp-action="Index" class="btn btn-danger m-1">Delete</a>
+                <a role="button" asp-action="Index" class="btn btn-secondary m-1">Back</a>
+                <a role="button" asp-action="Update" asp-route-id="@Model.BookkeepingId" class="btn btn-warning m-1">Edit</a>
+                <button role="button" data-bs-toggle="modal" data-bs-target="#removeModal" data-bs-id="@Model.BookkeepingId" class="btn btn-danger btn-normalize">Remove</button>
         </div>
         </div>
     </div>
 </div> 
 
+<div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="Delete" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="inputId" class="col-form-label">Do you want remove it?</label>
+                        <input type="text" name="id" hidden class="form-control" id="inputId" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save changes!</button>
+                </div>
+            </form>
 
+        </div>
+    </div>
+</div>
+
+<script>
+    var removeModal = document.getElementById('removeModal')
+    removeModal.addEventListener('show.bs.modal', function (event) {
+
+        var button = event.relatedTarget
+
+        var recipient = button.getAttribute('data-bs-id')
+
+        var modalBodyInput = removeModal.querySelector('.modal-body input')
+
+        modalBodyInput.value = recipient
+    })
+</script>
 
 <style>
     body {
