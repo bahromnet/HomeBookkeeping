@@ -48,6 +48,14 @@ public class BookkeepingController : Controller
     }
 
     [HttpPost]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        await _mediator.Send(new DeleteBookkeepingCommand() { Id = id });
+        return RedirectToAction("Index");
+    }
+
+
+    [HttpPost]
     public async Task<IActionResult> Update(BookkeepingGetDto bookkeepingGetDto)
     {
         if (ModelState.IsValid)

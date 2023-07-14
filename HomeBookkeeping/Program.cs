@@ -1,5 +1,6 @@
 using Application;
 using Application.Common.Interfaces;
+using HomeBookkeeping.Middelwares;
 using HomeBookkeeping.Services;
 using Infrastructure;
 using System.Reflection;
@@ -28,6 +29,7 @@ public class Program
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
+        app.UseGlobalExceptionMiddleware();
         
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
@@ -39,6 +41,7 @@ public class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+
 
         app.UseRouting();
         app.UseAuthentication();
