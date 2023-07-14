@@ -8,8 +8,9 @@ namespace Application.UseCases.Bookkepings.Command
     public record class CreateBookkeepingCommand : IRequest<Guid>
     {
         public decimal Amount { get; set; }
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
         public Guid CategoryId { get; set; }
+        public DateTime CreatedAt { get; set; }= DateTime.Now;
     }
 
     public class CreateBookkeepingCommandHandler : IRequestHandler<CreateBookkeepingCommand, Guid>
@@ -31,15 +32,12 @@ namespace Application.UseCases.Bookkepings.Command
                 Amount = request.Amount,
                 Comment = request.Comment,
                 CategoryId = request.CategoryId,
-                Created = DateTime.Now,
+                Created =request.CreatedAt,
                 CreatedBy = _userService.Id,
             };
 
             _context.Bookkeepings.Add(entity);
-            if(entity is null)
-            {
-                throw new NotFoundException(nameof(Bookkepings), entity.BookkeepingId);
-            }
+          
             await _context.SaveChangesAsync(cancellationToken);
 
             return entity.BookkeepingId;
