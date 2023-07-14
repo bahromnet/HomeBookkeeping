@@ -1,13 +1,15 @@
-﻿namespace Application.Common.Models
+﻿using Domain.Entities;
+
+namespace Application.Common.Models
 {
     public class BookkeepingGetDto
     {
 
         public Guid BookkeepingId { get; set; }
         public decimal Amount { get; set; }
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
-        public  CategoryGetDto? Category { get; set; }
+        public virtual  Category? Category { get; set; }
 
         public DateTime Created { get; set; }
 

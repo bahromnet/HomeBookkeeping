@@ -1,4 +1,6 @@
-﻿using Application.UseCases.Bookkepings.Command;
+﻿using Application.Common.Models;
+using Application.UseCases.Bookkepings.Command;
+using Application.UseCases.Bookkepings.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +36,36 @@ public class BookkeepingController : Controller
         }
         return View(command);
     }
+
+    public async Task<IActionResult> Update(Guid id)
+    {
+        var foundBookkeepingDto = await _mediator.Send(new GetByIdBookkeepingQueries()
+        {
+            BookkeepingId = id
+        });
+
+        return await Task.FromResult(View(foundBookkeepingDto));
+    }
+
+    [HttpPost] 
+    public async Task<IActionResult> Update(BookkeepingGetDto bookkeepingGetDto)
+    {
+        if (ModelState.IsValid)
+        {
+            var updateCommand = new UpdateBookkeepingCommand()
+            {
+                BookkeepingId = bookkeepingGetDto.BookkeepingId,
+                Amount = bookkeepingGetDto.Amount,
+                CategoryId = bookkeepingGetDto.Category.CategoryId,
+                Comment = bookkeepingGetDto.Comment
+            };
+            await _mediator.Send(updateCommand);
+            return RedirectToAction("Index");   
+
+        }
+        return View(bookkeepingGetDto);
+    }
+
     //[HttpPost]
     //public async Task<IActionResult> Update()
     //{
