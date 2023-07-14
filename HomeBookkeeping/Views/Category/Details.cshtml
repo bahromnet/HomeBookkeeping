@@ -15,7 +15,7 @@
         <div class="col d-flex justify-content-xxl-end">
             <a role="button" asp-action="Index" class="btn btn-secondary m-1">Back</a>
             <a role="button" asp-action="Update" asp-route-id="@Model.CategoryId" class="btn btn-warning m-1">Edit</a>
-            <button role="button" data-bs-toggle="modal" data-bs-target="#removeModal" data-bs-id="@Model.BookkeepingId" class="btn btn-danger btn-normalize">Remove</button>
+            <button role="button" data-bs-toggle="modal" data-bs-target="#removeModal" data-bs-id="@Model.CategoryId" class="btn btn-danger btn-normalize">Remove</button>
         </div>
     </div>
 </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save changes!</button>
+                    <button type="submit" class="btn btn-primary">Yes Remove!</button>
                 </div>
             </form>
 
