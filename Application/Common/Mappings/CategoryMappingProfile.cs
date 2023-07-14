@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Common.Models;
+using AutoMapper;
+using Domain.Entities;
 
 namespace Application.Common.Mappings
 {
-    internal class CategoryMappingProfile
+    public class CategoryMappingProfile : Profile
     {
+        public CategoryMappingProfile()
+        {
+            CreateMap<Category, CategoryGetDto>().ReverseMap();
+        }
     }
 }

@@ -15,6 +15,7 @@
   <ItemGroup>
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Common\Mappings\" />
+    <Folder Include="Common\Filters\" />
     <Folder Include="Common\Services\" />
   </ItemGroup>
 
