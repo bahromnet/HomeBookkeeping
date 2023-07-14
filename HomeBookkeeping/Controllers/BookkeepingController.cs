@@ -25,11 +25,11 @@ public class BookkeepingController : Controller
     {
         return await Task.FromResult(View());
     }
-    
-    [HttpPost]    
+
+    [HttpPost]
     public async Task<IActionResult> Create(CreateBookkeepingCommand command)
     {
-        if(ModelState.IsValid)
+        if (ModelState.IsValid)
         {
             await _mediator.Send(command);
             return RedirectToAction("Index");
@@ -47,7 +47,7 @@ public class BookkeepingController : Controller
         return await Task.FromResult(View(foundBookkeepingDto));
     }
 
-    [HttpPost] 
+    [HttpPost]
     public async Task<IActionResult> Update(BookkeepingGetDto bookkeepingGetDto)
     {
         if (ModelState.IsValid)
@@ -60,16 +60,17 @@ public class BookkeepingController : Controller
                 Comment = bookkeepingGetDto.Comment
             };
             await _mediator.Send(updateCommand);
-            return RedirectToAction("Index");   
+            return RedirectToAction("Index");
 
         }
         return View(bookkeepingGetDto);
     }
 
-    //[HttpPost]
-    //public async Task<IActionResult> Update()
-    //{
 
-    //}
+    public async Task<IActionResult> ViewDetails(Guid id)
+    {
+        var foundBookkeeping = await _mediator.Send(new GetByIdBookkeepingQueries() { BookkeepingId = id });
+        return View(foundBookkeeping);
+    }
 
 }
