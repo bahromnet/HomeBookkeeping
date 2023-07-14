@@ -1,9 +1,12 @@
-﻿using Application.UseCases.Categories.Commands;
+﻿using Application.UseCases.Bookkepings.Queries;
+using Application.UseCases.Categories.Commands;
 using Application.UseCases.Categories.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeBookkeeping.Controllers;
+[Authorize]
 public class CategoryController : Controller
 {
     private readonly IMediator _mediator;
@@ -13,14 +16,12 @@ public class CategoryController : Controller
         _mediator = mediator;
     }
 
-    // GET: CategoryController
     public async Task<IActionResult> Index()
     {
         var data = await _mediator.Send(new GetAllCategoriesQuery());
         return View(data);
     }
 
-    // GET: CategoryController/Details/5
     public async Task<IActionResult> Details(Guid id)
     {
         var detail = await _mediator.Send(new GetByIdCategoryQuery { CategoryId = id });
@@ -28,10 +29,11 @@ public class CategoryController : Controller
         return View(detail);
     }
 
-    // GET: CategoryController/Create
-    public ActionResult Create() => View();
+    public async Task<IActionResult> Create()
+    {
+        return await Task.FromResult(View());
+    }
 
-    // POST: CategoryController/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([FromForm] CreateCategoryCommand createCategory)
@@ -44,18 +46,19 @@ public class CategoryController : Controller
         return View(nameof(Index));
     }
 
-    // GET: CategoryController/Edit/5
     public async Task<IActionResult> Update(Guid id)
     {
-        var categoryDetails = await _mediator.Send(new GetByIdCategoryQuery { CategoryId = id});
-        if (categoryDetails is null) return View("NotFound");
-        return View(categoryDetails);
+        var foundCategoryDto = await _mediator.Send(new GetByIdCategoryQuery()
+        {
+            CategoryId = id
+        });
+
+        return await Task.FromResult(View(foundCategoryDto));
     }
 
-    // POST: CategoryController/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit([FromForm] UpdateCategoryCommand updateCategory)
+    public async Task<IActionResult> Update(UpdateCategoryCommand updateCategory)
     {
         if (!ModelState.IsValid)
         {
@@ -65,22 +68,11 @@ public class CategoryController : Controller
         return View(nameof(Index));
     }
 
-    // GET: CategoryController/Delete/5
-    public async Task<IActionResult> Delete(Guid id)
-    {
-        var categoryDetails = await _mediator.Send(new GetByIdCategoryQuery { CategoryId = id });
-        if (categoryDetails is null) return View("NotFound");
-        return View(categoryDetails);
-    }
-
-    // POST: CategoryController/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Delete(DeleteCategoryCommand deleteCategory)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        var categoryDetails = await _mediator.Send(new GetByIdCategoryQuery { CategoryId = deleteCategory.CategoryId });
-        if (categoryDetails is null) return View("NotFound");
-        await _mediator.Send(deleteCategory);
+        await _mediator.Send(new DeleteCategoryCommand() { CategoryId = id });
         return RedirectToAction(nameof(Index));
     }
 }
