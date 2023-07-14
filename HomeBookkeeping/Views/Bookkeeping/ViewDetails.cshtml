@@ -17,7 +17,7 @@
         <div class="col-md-6 p-5" style="background-color: rgba(255, 255,255, 0.6);border-radius:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
             <dl class="row">
                 <dt class="col-sm-4">Amount:</dt>
-                <dd class="col-sm-8 @((Model.Category.ExpenceIncomeType) ? "text-success" : "text-danger")">@((Model.Category.ExpenceIncomeType) ? $"+{Model.Amount}$" : $"-{Model.Amount}$")</dd>
+                <dd class="col-sm-8 @((Model.Category.ExpenceIncomeType == "Income") ? "text-success" : "text-danger")">@((Model.Category.ExpenceIncomeType == "Income") ? $"+{Model.Amount}$" : $"-{Model.Amount}$")</dd>
          
                 <dt class="col-sm-4">Comment:</dt>
                 <dd class="col-sm-8">@Model.Comment</dd>

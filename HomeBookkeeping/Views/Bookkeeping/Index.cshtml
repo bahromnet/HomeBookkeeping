@@ -24,7 +24,7 @@
                 <tr>
                     <th scope="row">@(i++)</th>
                     <td>@item.Category.CategoryName</td>
-                    <td class="@((item.Category.ExpenceIncomeType) ? "text-success" : "text-danger")">@((item.Category.ExpenceIncomeType) ? $"+{item.Amount}$" : $"-{item.Amount}$")</td>
+                    <td class="@((item.Category.ExpenceIncomeType == "Income") ? "text-success" : "text-danger")">@((item.Category.ExpenceIncomeType == "Income") ? $"+{item.Amount}$" : $"-{item.Amount}$")</td>
                     <td>@item.Created</td>
                     <td>
                         <a role="button" asp-action="Update" asp-route-id="@item.BookkeepingId" class="btn btn-warning btn-normalize">Update</a>

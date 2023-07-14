@@ -4,7 +4,7 @@
     {
         public Guid CategoryId { get; set; }
         public string CategoryName { get; set; }
-        public bool ExpenceIncomeType { get; set; }
+        public string ExpenceIncomeType { get; set; }
 
     }
 }
