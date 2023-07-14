@@ -8,7 +8,7 @@ public class Category
     /// if ExpenceIncomeType = false type: Expence
     /// else type:Income
     /// </summary>
-    public bool ExpenceIncomeType { get; set; }
+    public string ExpenceIncomeType { get; set; }
 
     public virtual IList<Bookkeeping>? Bookkeepings { get; set; } = new List<Bookkeeping>();
 
