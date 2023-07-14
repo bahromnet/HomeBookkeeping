@@ -45,7 +45,7 @@ public class CategoryController : Controller
     }
 
     // GET: CategoryController/Edit/5
-    public async Task<IActionResult> Edit(Guid id)
+    public async Task<IActionResult> Update(Guid id)
     {
         var categoryDetails = await _mediator.Send(new GetByIdCategoryQuery { CategoryId = id});
         if (categoryDetails is null) return View("NotFound");

@@ -1,6 +1,10 @@
-﻿
-@{
+﻿@using Application.UseCases.Categories.Queries;
+@using MediatR;
+@inject IMediator mediator
 
+@{
+    var categories = await mediator.Send(new GetAllCategoriesQuery());
+    int i = 1;
 }
 
 <div class="container border" style=" background-color: rgba(255, 255,255, 0.6);border-radius:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
@@ -14,43 +18,26 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Transport</td>
-                <td>Income</td>
-                <td>
-                    <a role="button" class="btn btn-warning btn-normalize">Update</a>
-                    <a role="button" class="btn btn-danger btn-normalize">Remove</a>
-                    <a role="button" class="btn btn-primary btn-normalize">Details</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Food</td>
-                <td>Expence</td>
-                <td>
-                    <a role="button" class="btn btn-warning btn-normalize">Update</a>
-                    <a role="button" class="btn btn-danger btn-normalize">Remove</a>
-                    <a role="button" class="btn btn-primary btn-normalize">Details</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Education</td>
-                <td>Income</td>
-                <td>
-                    <a role="button" class="btn btn-warning btn-normalize">Update</a>
-                    <a role="button" class="btn btn-danger btn-normalize">Remove</a>
-                    <a role="button" class="btn btn-primary btn-normalize">Details</a>
-                </td>
-
-            </tr>
+            @foreach (var item in categories)
+            {
+                <tr>
+                    <th scope="row">@(i++)</th>
+                    <td>@item.CategoryName</td>
+                    <td>@item.ExpenceIncomeType</td>
+                    <td>
+                        <a role="button" asp-action="Update" asp-route-id="@item.CategoryId" class="btn btn-warning btn-normalize">Update</a>
+                        <a role="button" class="btn btn-danger btn-normalize">Remove</a>
+                        <a role="button" asp-action="Details" asp-route-id="@item.CategoryId" class="btn btn-primary btn-normalize">Details</a>
+                    </td>
+                </tr>
+            }
+            
         </tbody>
     </table>
 </div>
 
 <div style="position: fixed; right: 35px; bottom: 80px;" class="text-white">
-    <a asp-controller="@Model" asp-action="Create" class="btn btn-success">
+    <a asp-controller="Category" asp-action="Create" class="btn btn-success">
         <i class="bi bi-plus-circle"></i> Add New
     </a>
 </div>

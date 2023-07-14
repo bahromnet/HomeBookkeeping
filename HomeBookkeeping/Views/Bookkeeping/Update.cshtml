@@ -19,7 +19,7 @@
                     <option value="@Model.Category.CategoryId" selected>@Model.Category.CategoryName</option>
                     @foreach (var item in Categories)
                     {
-                        <option value="@item.CategoryId" style="color: @(item.ExpenceIncomeType ? "green" : "red")">@item.CategoryName (@InComingExpenceTypeString(item.ExpenceIncomeType))</option>
+                        <option value="@item.CategoryId" style="color: @(item.ExpenceIncomeType == "Income" ? "green" : "red")">@item.CategoryName (@item.ExpenceIncomeType)</option>
 
                     }
                     <span asp-validation-for="Category.CategoryId" class="text-danger"></span>
@@ -48,11 +48,3 @@
         </form>
     </div>
 </div>
-@{
-    string InComingExpenceTypeString(bool type)
-    {
-        if (type)
-            return "Incoming";
-        else return "Expence";
-    }
-}
