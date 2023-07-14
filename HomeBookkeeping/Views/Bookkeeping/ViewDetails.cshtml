@@ -1,5 +1,65 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Application.Common.Models;
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ApplicationUser> userManager;
+@model BookkeepingGetDto; 
 @{
+    ViewData["Title"] = "Details";
+    var creator =await userManager.FindByIdAsync(Model.CreatedBy);
+
+    var ModifiedBy = await userManager.FindByIdAsync(Model.LastModifiedBy);
+
 }
+
+<div class="container">
+    <h1>Details</h1>
+
+    <div class="row">
+        <div class="col-md-6 p-5" style="background-color: rgba(255, 255,255, 0.6);border-radius:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+            <dl class="row">
+                <dt class="col-sm-4">Amount:</dt>
+                <dd class="col-sm-8 @((Model.Category.ExpenceIncomeType) ? "text-success" : "text-danger")">@((Model.Category.ExpenceIncomeType) ? $"+{Model.Amount}$" : $"-{Model.Amount}$")</dd>
+         
+                <dt class="col-sm-4">Comment:</dt>
+                <dd class="col-sm-8">@Model.Comment</dd>
+
+                <dt class="col-sm-4">Category:</dt>
+                <dd class="col-sm-8">@Model.Category?.CategoryName</dd>
+
+                <dt class="col-sm-4">Created:</dt>
+                <dd class="col-sm-8">@Model.Created</dd>
+
+                <dt class="col-sm-4">Created By:</dt>
+                <dd class="col-sm-8">@creator.UserName</dd>
+
+                @if (Model.LastModified != null)
+                {
+                    <dt class="col-sm-4">Last Modified:</dt>
+                    <dd class="col-sm-8">@Model.LastModified</dd>
+                }
+
+                @if (ModifiedBy is not null)
+                {
+                <dt class="col-sm-4">Last Modified By:</dt>
+                    <dd class="col-sm-8">@ModifiedBy.UserName</dd>
+                }
+            </dl>
+            <div class="col d-flex justify-content-xxl-end">
+        <a role="button" asp-action="Index" class="btn btn-secondary m-1">Back</a>
+        <a role="button" asp-action="Update" asp-route-id="@Model.BookkeepingId" class="btn btn-warning m-1">Edit</a>
+        <a role="button" asp-action="Index" class="btn btn-danger m-1">Delete</a>
+        </div>
+        </div>
+    </div>
+</div> 
+
+
+
+<style>
+    body {
+        background-image: url(/images/ViewDetailsImage.jpg);
+        background-repeat: no-repeat;
+        background-color: #cccccc;
+        background-size: cover;
+        background-position: center;
+    }
+</style>
